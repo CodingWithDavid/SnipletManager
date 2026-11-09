@@ -67,7 +67,14 @@
                             <button type="button" class="snippet-name" @onclick="() => OpenSnippet(snippet)" title="Open and edit snippet">@snippet.Name</button>
                         </TemplateColumn>
                         <TemplateColumn Title="Text value" SortBy="@(GridSort<SnippetItem>.ByAscending(x => x.Value))" Context="snippet">
-                            <span class="text-preview">@snippet.Value</span>
+                            @if (snippet.IsMasked)
+                            {
+                                <span class="text-preview" aria-label="Hidden text">********</span>
+                            }
+                            else
+                            {
+                                <span class="text-preview">@snippet.Value</span>
+                            }
                         </TemplateColumn>
                         <PropertyColumn Title="Category" Property="@(x => x.CategoryName)" Sortable="true" />
                         <TemplateColumn Title="Actions" Context="snippet" Align="Align.Right">
@@ -132,12 +139,27 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label class="checkbox-label" for="item-encrypt">
+                            <input id="item-encrypt" type="checkbox" @bind="_isMasked" disabled="@_busy" aria-describedby="encrypt-help" />
+                            Encrypt
+                        </label>
+                        <div id="encrypt-help" class="field-help">Hides text only; stored unencrypted. Copy still copies the original text.</div>
+                    </div>
+                    <div class="form-group">
                         <div class="value-label"><label for="item-value">Text value</label><button type="button" class="row-button" @onclick="PasteAsync" disabled="@_busy">Paste from clipboard</button></div>
-                        <div class="spell-field">
-                            <textarea id="item-value" class="form-control snippet-text" required maxlength="@_settings.SnippetTextLimit"
-                                      @bind="_value" @bind:event="oninput" disabled="@_busy" spellcheck="false"></textarea>
-                            <div class="spell-mirror" aria-hidden="true"></div>
-                        </div>
+                        @if (_isMasked)
+                        {
+                            <input id="item-value" type="password" class="form-control" required maxlength="@_settings.SnippetTextLimit"
+                                   @bind="_value" @bind:event="oninput" disabled="@_busy" spellcheck="false" autocomplete="new-password" />
+                        }
+                        else
+                        {
+                            <div class="spell-field">
+                                <textarea id="item-value" class="form-control snippet-text" required maxlength="@_settings.SnippetTextLimit"
+                                          @bind="_value" @bind:event="oninput" disabled="@_busy" spellcheck="false"></textarea>
+                                <div class="spell-mirror" aria-hidden="true"></div>
+                            </div>
+                        }
                         <div class="field-help"><span>Plain text. Line breaks and spacing are preserved.</span><span>@_value.Length.ToString("N0") / @_settings.SnippetTextLimit.ToString("N0")</span></div>
                     </div>
                 }

@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using SnipletManager.Core;
@@ -60,6 +61,99 @@ public sealed class LibraryServiceTests : IAsyncLifetime
         Assert.Equal("Greeting", snippet.Name);
         Assert.Equal(text, snippet.Value);
         Assert.Equal(1, Assert.Single(await service.GetCategoriesAsync()).Count);
+        Assert.False(snippet.IsMasked);
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public async Task Should_PersistMaskWithoutEncryptingText_When_SavingSnippet(bool isMasked)
+    {
+        // Arrange
+        var category = await AddCategoryAsync();
+        var text = "  Private\r\n\ttext!  \n";
+
+        // Act
+        await service.SaveSnippetAsync(null, category.Id, "Masked snippet", text, Guid.Empty, isMasked);
+        var reopened = new LibraryService(factory, Options.Create(settings));
+        var page = await reopened.GetSnippetsAsync(null, null, SnippetSort.Name, false, 0, settings.PageSize);
+
+        // Assert
+        var snippet = Assert.Single(page.Items);
+        Assert.Equal(isMasked, snippet.IsMasked);
+        Assert.Equal(text, snippet.Value);
+        await using var db = await factory.CreateDbContextAsync();
+        var entity = await db.Snippets.SingleAsync();
+        Assert.Equal(isMasked, entity.IsMasked);
+        Assert.Equal(text, entity.Value);
+    }
+
+    [Fact]
+    public async Task Should_UpdateMaskAndRejectStaleChanges_When_EditingSnippet()
+    {
+        // Arrange
+        var category = await AddCategoryAsync();
+        await service.SaveSnippetAsync(null, category.Id, "Name", "Original", Guid.Empty);
+        var original = Assert.Single((await ReadAsync()).Items);
+
+        // Act
+        await service.SaveSnippetAsync(original.Id, category.Id, "Name", original.Value, original.Version, true);
+        await Assert.ThrowsAsync<ValidationException>(() =>
+            service.SaveSnippetAsync(original.Id, category.Id, "Name", "Stale", original.Version, false));
+
+        // Assert
+        var masked = Assert.Single((await ReadAsync()).Items);
+        Assert.True(masked.IsMasked);
+        Assert.Equal("Original", masked.Value);
+        await service.SaveSnippetAsync(masked.Id, category.Id, masked.Name, masked.Value, masked.Version, false);
+        var unmasked = Assert.Single((await ReadAsync()).Items);
+        Assert.False(unmasked.IsMasked);
+        Assert.Equal("Original", unmasked.Value);
+    }
+
+    [Fact]
+    public async Task Should_PreserveExistingTextAndDefaultToUnmasked_When_UpgradingDatabase()
+    {
+        // Arrange
+        await using var db = await factory.CreateDbContextAsync();
+        var migrator = db.GetService<IMigrator>();
+        await migrator.MigrateAsync("20261107182936_InitialLibrary");
+        var categoryVersion = Guid.NewGuid();
+        var snippetVersion = Guid.NewGuid();
+        await db.Database.ExecuteSqlInterpolatedAsync(
+            $"INSERT INTO Categories (Id, Name, NormalizedName, Version) VALUES (1, {"Work"}, {"WORK"}, {categoryVersion})");
+        await db.Database.ExecuteSqlInterpolatedAsync(
+            $"INSERT INTO Snippets (CategoryId, Name, Value, NormalizedName, SearchValue, Version) VALUES (1, {"Existing"}, {"Existing\ntext"}, {"EXISTING"}, {"EXISTING\nTEXT"}, {snippetVersion})");
+
+        // Act
+        await db.Database.MigrateAsync();
+
+        // Assert
+        var snippet = Assert.Single((await ReadAsync()).Items);
+        Assert.False(snippet.IsMasked);
+        Assert.Equal("Existing\ntext", snippet.Value);
+        Assert.Equal(snippetVersion, snippet.Version);
+    }
+
+    [Fact]
+    public async Task Should_SearchAndSortOriginalText_When_SnippetsAreMasked()
+    {
+        // Arrange
+        var category = await AddCategoryAsync();
+        await service.SaveSnippetAsync(null, category.Id, "One", "Zulu text", Guid.Empty, true);
+        await service.SaveSnippetAsync(null, category.Id, "Two", "Alpha text", Guid.Empty, true);
+
+        // Act
+        var sorted = await ReadAsync(sort: SnippetSort.Value);
+        var searched = await ReadAsync(search: "zulu");
+
+        // Assert
+        Assert.Equal(new[] { "Two", "One" }, sorted.Items.Select(x => x.Name));
+        Assert.All(sorted.Items, snippet => Assert.True(snippet.IsMasked));
+        var match = Assert.Single(searched.Items);
+        Assert.Equal("One", match.Name);
+        Assert.Equal("Zulu text", match.Value);
+        Assert.True(match.IsMasked);
     }
 
     [Theory]
@@ -95,18 +189,20 @@ public sealed class LibraryServiceTests : IAsyncLifetime
             service.SaveSnippetAsync(null, category.Id, name, "Text", Guid.Empty));
     }
 
-    [Fact]
-    public async Task Save_EnforcesConfiguredLengthBoundaries()
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Save_EnforcesConfiguredLengthBoundaries(bool isMasked)
     {
         var category = await AddCategoryAsync(new string('a', settings.CategoryNameLimit));
         await Assert.ThrowsAsync<ValidationException>(() =>
             service.SaveCategoryAsync(null, new string('b', settings.CategoryNameLimit + 1), Guid.Empty));
         await service.SaveSnippetAsync(null, category.Id, new string('n', settings.SnippetNameLimit),
-            new string('t', settings.SnippetTextLimit), Guid.Empty);
+            new string('t', settings.SnippetTextLimit), Guid.Empty, isMasked);
         await Assert.ThrowsAsync<ValidationException>(() =>
             service.SaveSnippetAsync(null, category.Id, new string('n', settings.SnippetNameLimit + 1), "Text", Guid.Empty));
         await Assert.ThrowsAsync<ValidationException>(() =>
-            service.SaveSnippetAsync(null, category.Id, "Oversized", new string('t', settings.SnippetTextLimit + 1), Guid.Empty));
+            service.SaveSnippetAsync(null, category.Id, "Oversized", new string('t', settings.SnippetTextLimit + 1), Guid.Empty, isMasked));
         Assert.Single((await ReadAsync()).Items);
     }
 

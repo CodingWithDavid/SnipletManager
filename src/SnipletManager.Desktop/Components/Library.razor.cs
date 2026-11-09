@@ -31,6 +31,7 @@ public partial class Library
     private int _editorCategoryId;
     private string _name = "";
     private string _value = "";
+    private bool _isMasked;
     private string? _toast;
     private bool _toastError;
     private readonly CancellationTokenSource _lifetime = new();
@@ -157,6 +158,7 @@ public partial class Library
         _editorCategoryId = snippet?.CategoryId ?? _categoryId ?? _categories.First().Id;
         _name = snippet?.Name ?? "";
         _value = snippet?.Value ?? "";
+        _isMasked = snippet?.IsMasked ?? false;
         OpenDialog(DialogMode.Snippet);
     }
 
@@ -209,7 +211,8 @@ public partial class Library
             if (mode == DialogMode.Category)
                 await LibraryService.SaveCategoryAsync(_editorId, _name, _editorVersion, _lifetime.Token);
             else
-                await LibraryService.SaveSnippetAsync(_editorId, _editorCategoryId, _name, _value, _editorVersion, _lifetime.Token);
+                await LibraryService.SaveSnippetAsync(_editorId, _editorCategoryId, _name, _value, _editorVersion,
+                    _isMasked, _lifetime.Token);
             _busy = false;
             await CloseDialogAsync();
             ShowToast($"{(mode == DialogMode.Category ? "Category" : "Snippet")} {(editing ? "updated" : "added")}.");

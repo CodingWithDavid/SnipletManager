@@ -10,6 +10,7 @@ A Windows desktop app for organizing reusable text snippets into categories. Bui
 - Search snippet names and text across the library or within a selected category.
 - Type text, paste with Ctrl+V, or replace the editor contents using **Paste from clipboard**.
 - Check spelling in name and text fields, with red underlines and right-click correction suggestions.
+- Hide a snippet's text in the editor and grid using the **Encrypt** checkbox (visual masking only).
 - Receive toast notifications for successful changes and failures, and confirm deletions before they happen.
 - Work in a professional blue interface with local SQLite persistence.
 
@@ -41,6 +42,14 @@ Select **All snippets** to search the entire library, or select a category to se
 Names are trimmed and unique ignoring case. Snippet names must be unique within their category. Blank names and whitespace-only text are rejected; snippet text otherwise preserves line breaks and whitespace.
 
 **Deleting a category also deletes every snippet it contains.** The app displays a confirmation before category or snippet deletion.
+
+### Hiding snippet text
+
+Select **Encrypt** when adding or editing a snippet to hide its text behind a password-style field and a fixed mask in the grid. The setting is saved with the snippet and can be turned off in its editor. New snippets default to unmasked.
+
+Despite the checkbox name, this is **visual masking, not encryption**: SQLite still stores the original text unencrypted. Search and sorting continue to use the original text, and **Copy** copies that text to the clipboard. Masking does not protect against someone who can access the app, its database, or developer tools.
+
+The masked editor is a single-line password input and does not offer spell checking. Toggling the checkbox or saving without changing the text preserves existing line breaks. To edit multiple lines, turn masking off, edit the text, and turn it back on before saving. **Paste from clipboard** can also replace the complete value, including line breaks.
 
 ### Spell checking
 

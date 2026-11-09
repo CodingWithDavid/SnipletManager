@@ -22,6 +22,7 @@ public sealed class Snippet
     public string Name { get; set; } = "";
     [Required]
     public string Value { get; set; } = "";
+    public bool IsMasked { get; set; }
     public string NormalizedName { get; set; } = "";
     public string SearchValue { get; set; } = "";
     public Guid Version { get; set; }

@@ -7,7 +7,7 @@ using SnipletManager.Core.Data;
 namespace SnipletManager.Core;
 
 public sealed record CategoryItem(int Id, string Name, int Count, Guid Version);
-public sealed record SnippetItem(int Id, int CategoryId, string CategoryName, string Name, string Value, Guid Version);
+public sealed record SnippetItem(int Id, int CategoryId, string CategoryName, string Name, string Value, Guid Version, bool IsMasked = false);
 public sealed record SnippetPage(IReadOnlyList<SnippetItem> Items, int Total);
 public enum SnippetSort { Name, Value, CategoryName }
 
@@ -49,7 +49,7 @@ public sealed class LibraryService(IDbContextFactory<AppDbContext> factory, IOpt
             _ => descending ? query.OrderByDescending(x => x.Name) : query.OrderBy(x => x.Name)
         };
         var items = await ordered.ThenBy(x => x.Id).Skip(start).Take(count)
-            .Select(x => new SnippetItem(x.Id, x.CategoryId, x.Category.Name, x.Name, x.Value, x.Version))
+            .Select(x => new SnippetItem(x.Id, x.CategoryId, x.Category.Name, x.Name, x.Value, x.Version, x.IsMasked))
             .ToListAsync(cancellationToken);
         return new SnippetPage(items, total);
     }
@@ -77,7 +77,7 @@ public sealed class LibraryService(IDbContextFactory<AppDbContext> factory, IOpt
     }
 
     public async Task SaveSnippetAsync(int? id, int categoryId, string? name, string? value, Guid version,
-        CancellationToken cancellationToken = default)
+        bool isMasked = false, CancellationToken cancellationToken = default)
     {
         var cleanName = ValidateName(name, settings.SnippetNameLimit, "Snippet name");
         if (string.IsNullOrWhiteSpace(value))
@@ -102,6 +102,7 @@ public sealed class LibraryService(IDbContextFactory<AppDbContext> factory, IOpt
         entity.CategoryId = categoryId;
         entity.Name = cleanName;
         entity.Value = value;
+        entity.IsMasked = isMasked;
         entity.NormalizedName = cleanName.ToUpperInvariant();
         entity.SearchValue = value.ToUpperInvariant();
         entity.Version = Guid.NewGuid();
