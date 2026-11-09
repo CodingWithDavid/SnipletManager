@@ -1,0 +1,4 @@
+interface:
+  display_name: "Return Contract Audit"
+  short_description: "Audit error and empty return patterns"
+  default_prompt: "Use $return-contract-audit to analyze this repo's method return behavior and write the report to documents."

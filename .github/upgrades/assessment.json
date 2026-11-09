@@ -1,0 +1,681 @@
+{
+  "settings": {
+    "components": {
+      "code": false,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2025-12-10T21:11:12.5097614Z",
+  "analysisEndTime": "2025-12-10T21:11:17.9912796Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 2,
+      "issues": 7,
+      "incidents": 21,
+      "effort": 21
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 4,
+        "Optional": 1,
+        "Potential": 14,
+        "Information": 2
+      },
+      "category": {
+        "NuGet": 10,
+        "Project": 2,
+        "Api": 9
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "ftodashboard\\ftodashboard.csproj",
+      "startingProject": true,
+      "issues": 7,
+      "storyPoints": 17,
+      "properties": {
+        "appName": "ftodashboard",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 188,
+        "numberOfCodeFiles": 66,
+        "linesTotal": 173578,
+        "linesOfCode": 3271,
+        "totalApiScanned": 6284,
+        "minLinesOfCodeToChange": 9,
+        "maxLinesOfCodeToChange": 9
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "4e8f4cb5-f57d-45d0-939d-66ec8b239635",
+          "ruleId": "NuGet.0002",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.18\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Authentication.OpenIdConnect, and replace with new package Microsoft.AspNetCore.Authentication.OpenIdConnect 10.0.1",
+              "protected": "Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.18\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Authentication.OpenIdConnect, and replace with new package Microsoft.AspNetCore.Authentication.OpenIdConnect 10.0.1"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\ftodashboard.csproj",
+            "snippet": "Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.18\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Authentication.OpenIdConnect, and replace with new package Microsoft.AspNetCore.Authentication.OpenIdConnect 10.0.1",
+            "protectedSnippet": "Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.18\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Authentication.OpenIdConnect, and replace with new package Microsoft.AspNetCore.Authentication.OpenIdConnect 10.0.1",
+            "label": "Microsoft.AspNetCore.Authentication.OpenIdConnect 8.0.18",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageVersion": "8.0.18",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "f2c24411-4c20-4dec-8862-95bfed209a0f",
+          "ruleId": "NuGet.0002",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.1",
+              "protected": "Microsoft.EntityFrameworkCore, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.1"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\ftodashboard.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.1",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.1",
+            "label": "Microsoft.EntityFrameworkCore 9.0.7",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore",
+              "PackageVersion": "9.0.7",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "c2ad0951-4ed3-4c81-ae6c-b6e2a78d0182",
+          "ruleId": "NuGet.0002",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.Relational, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Relational, and replace with new package Microsoft.EntityFrameworkCore.Relational 10.0.1",
+              "protected": "Microsoft.EntityFrameworkCore.Relational, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Relational, and replace with new package Microsoft.EntityFrameworkCore.Relational 10.0.1"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\ftodashboard.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.Relational, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Relational, and replace with new package Microsoft.EntityFrameworkCore.Relational 10.0.1",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.Relational, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Relational, and replace with new package Microsoft.EntityFrameworkCore.Relational 10.0.1",
+            "label": "Microsoft.EntityFrameworkCore.Relational 9.0.7",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.Relational",
+              "PackageVersion": "9.0.7",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "64e05ddc-ba8a-47bf-90a0-a28fc7e42481",
+          "ruleId": "NuGet.0002",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.SqlServer, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.1",
+              "protected": "Microsoft.EntityFrameworkCore.SqlServer, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.1"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\ftodashboard.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.SqlServer, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.1",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.SqlServer, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.1",
+            "label": "Microsoft.EntityFrameworkCore.SqlServer 9.0.7",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.SqlServer",
+              "PackageVersion": "9.0.7",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "36ef72e7-a33a-40a8-9fdc-3cafeb8202cd",
+          "ruleId": "NuGet.0002",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4",
+              "protected": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\ftodashboard.csproj",
+            "snippet": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4",
+            "protectedSnippet": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4",
+            "label": "Newtonsoft.Json 13.0.3",
+            "properties": {
+              "PackageId": "Newtonsoft.Json",
+              "PackageVersion": "13.0.3",
+              "PackageNewVersion": "13.0.4",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "4e13b2c0-d6c4-4dc7-be85-b6602eb04dbc",
+          "ruleId": "NuGet.0006",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Found 1 files matching the rule:\r\n\r\nNuGet.config\r\n",
+              "protected": "Found 1 files matching the rule:\r\n\r\nNuGet.config\r\n"
+            },
+            "kind": "File",
+            "path": "NuGet.config",
+            "snippet": "Found 1 files matching the rule:\r\n\r\nNuGet.config\r\n",
+            "protectedSnippet": "Found 1 files matching the rule:\r\n\r\nNuGet.config\r\n"
+          }
+        },
+        {
+          "incidentId": "64add523-2411-493b-b4ea-d2729b6e69d0",
+          "ruleId": "NuGet.0005",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Azure.Identity, 1.14.1\n\nRecommendation:\n\nThis version takes a dependency on a deprecated version of MSAL .NET (Microsoft.Identity.Client).\nRemove Azure.Identity, and replace with new package Azure.Identity, 1.17.1",
+              "protected": "Azure.Identity, 1.14.1\n\nRecommendation:\n\nThis version takes a dependency on a deprecated version of MSAL .NET (Microsoft.Identity.Client).\nRemove Azure.Identity, and replace with new package Azure.Identity, 1.17.1"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\ftodashboard.csproj",
+            "snippet": "Azure.Identity, 1.14.1\n\nRecommendation:\n\nThis version takes a dependency on a deprecated version of MSAL .NET (Microsoft.Identity.Client).\nRemove Azure.Identity, and replace with new package Azure.Identity, 1.17.1",
+            "protectedSnippet": "Azure.Identity, 1.14.1\n\nRecommendation:\n\nThis version takes a dependency on a deprecated version of MSAL .NET (Microsoft.Identity.Client).\nRemove Azure.Identity, and replace with new package Azure.Identity, 1.17.1",
+            "label": "Azure.Identity 1.14.1",
+            "properties": {
+              "PackageId": "Azure.Identity",
+              "PackageVersion": "1.14.1",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "56294687-1e96-4046-842b-937d997cf102",
+          "ruleId": "Project.0002",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\ftodashboard.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "41ea9603-6adc-4628-b614-94df71fbf3a4",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Exception diagnostics are suppressed when IExceptionHandler.TryHandleAsync returns true ",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.UseExceptionHandler(\u0022/Error\u0022);",
+              "protected": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\Program.cs",
+            "snippet": "app.UseExceptionHandler(\u0022/Error\u0022);",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "label": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/aspnet-core/10/exception-handler-diagnostics-suppressed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 82,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "410710ba-432a-4b21-a21a-55132d301508",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 73,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "71740317-e73a-4d8a-9f09-025892cffc79",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddTelerikBlazor();",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\Program.cs",
+            "snippet": "builder.Services.AddTelerikBlazor();",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions",
+            "line": 70,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "d485e68d-3530-44cb-915b-897a08eba3e6",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Configuration.AddAzureKeyVault(\r\n    new Uri($\u0022https://{builder.Configuration[\u0022KeyVaultName\u0022]}.vault.azure.net/\u0022),\r\n    new DefaultAzureCredential());",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\Program.cs",
+            "snippet": "builder.Configuration.AddAzureKeyVault(\r\n    new Uri($\u0022https://{builder.Configuration[\u0022KeyVaultName\u0022]}.vault.azure.net/\u0022),\r\n    new DefaultAzureCredential());",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 33,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "6bda9b7b-be07-4028-a429-7e914b25fd52",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Configuration.AddAzureKeyVault(\r\n    new Uri($\u0022https://{builder.Configuration[\u0022KeyVaultName\u0022]}.vault.azure.net/\u0022),\r\n    new DefaultAzureCredential());",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\Program.cs",
+            "snippet": "builder.Configuration.AddAzureKeyVault(\r\n    new Uri($\u0022https://{builder.Configuration[\u0022KeyVaultName\u0022]}.vault.azure.net/\u0022),\r\n    new DefaultAzureCredential());",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 33,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "5714175c-1eed-4dc6-b914-55a2804fd0cb",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Azure.Extensions.AspNetCore.Configuration.Secrets, 1.3.1. Add package reference to Azure.Extensions.AspNetCore.Configuration.Secrets, 1.3.1",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Configuration.AddAzureKeyVault(\r\n    new Uri($\u0022https://{builder.Configuration[\u0022KeyVaultName\u0022]}.vault.azure.net/\u0022),\r\n    new DefaultAzureCredential());",
+              "protected": "T:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\Program.cs",
+            "snippet": "builder.Configuration.AddAzureKeyVault(\r\n    new Uri($\u0022https://{builder.Configuration[\u0022KeyVaultName\u0022]}.vault.azure.net/\u0022),\r\n    new DefaultAzureCredential());",
+            "protectedSnippet": "T:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions",
+            "label": "T:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions",
+            "properties": {
+              "PackageId": "Azure.Extensions.AspNetCore.Configuration.Secrets",
+              "PackageNewVersion": "1.3.1"
+            },
+            "line": 33,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "d9a28307-5120-45bc-b40a-98fa4648749e",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services\r\n    .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)\r\n     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection(\u0022AzureAd\u0022))\r\n     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)\r\n     .AddMicrosoftGraph(builder.Configuration.GetSection(\u0022DownstreamApi\u0022))\r\n     .AddInMemoryTokenCaches();",
+              "protected": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\Program.cs",
+            "snippet": "builder.Services\r\n    .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)\r\n     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection(\u0022AzureAd\u0022))\r\n     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)\r\n     .AddMicrosoftGraph(builder.Configuration.GetSection(\u0022DownstreamApi\u0022))\r\n     .AddInMemoryTokenCaches();",
+            "protectedSnippet": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults",
+            "label": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 14,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "42c78f21-5f96-4c95-9b1c-925dca6375e3",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services\r\n    .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)\r\n     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection(\u0022AzureAd\u0022))\r\n     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)\r\n     .AddMicrosoftGraph(builder.Configuration.GetSection(\u0022DownstreamApi\u0022))\r\n     .AddInMemoryTokenCaches();",
+              "protected": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\Program.cs",
+            "snippet": "builder.Services\r\n    .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)\r\n     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection(\u0022AzureAd\u0022))\r\n     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)\r\n     .AddMicrosoftGraph(builder.Configuration.GetSection(\u0022DownstreamApi\u0022))\r\n     .AddInMemoryTokenCaches();",
+            "protectedSnippet": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme",
+            "label": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 14,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "5a233e84-7af9-4cc6-823e-6e4d032946ec",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "ftodashboard\\ftodashboard.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var initialScopes = builder.Configuration.GetValue\u003Cstring\u003E(\u0022DownstreamApi:Scopes\u0022)?.Split(\u0027 \u0027);",
+              "protected": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration,System.String)"
+            },
+            "kind": "File",
+            "path": "ftodashboard\\Program.cs",
+            "snippet": "var initialScopes = builder.Configuration.GetValue\u003Cstring\u003E(\u0022DownstreamApi:Scopes\u0022)?.Split(\u0027 \u0027);",
+            "protectedSnippet": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration,System.String)",
+            "label": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration,System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 11,
+            "column": 0
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "ftodashboard.Tests\\ftodashboard.Tests.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 4,
+      "properties": {
+        "appName": "ftodashboard.Tests",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 4,
+        "numberOfCodeFiles": 2,
+        "linesTotal": 2460,
+        "linesOfCode": 665,
+        "totalApiScanned": 1220,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "85fd0ec5-6639-485d-8364-2da968dd7fa3",
+          "ruleId": "NuGet.0002",
+          "projectPath": "ftodashboard.Tests\\ftodashboard.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.1",
+              "protected": "Microsoft.EntityFrameworkCore, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.1"
+            },
+            "kind": "File",
+            "path": "ftodashboard.Tests\\ftodashboard.Tests.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.1",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.1",
+            "label": "Microsoft.EntityFrameworkCore 9.0.7",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore",
+              "PackageVersion": "9.0.7",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "89a03e26-e4b7-4156-9d1e-b7beafefb26b",
+          "ruleId": "NuGet.0002",
+          "projectPath": "ftodashboard.Tests\\ftodashboard.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.InMemory, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.InMemory, and replace with new package Microsoft.EntityFrameworkCore.InMemory 10.0.1",
+              "protected": "Microsoft.EntityFrameworkCore.InMemory, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.InMemory, and replace with new package Microsoft.EntityFrameworkCore.InMemory 10.0.1"
+            },
+            "kind": "File",
+            "path": "ftodashboard.Tests\\ftodashboard.Tests.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.InMemory, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.InMemory, and replace with new package Microsoft.EntityFrameworkCore.InMemory 10.0.1",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.InMemory, 9.0.7\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.InMemory, and replace with new package Microsoft.EntityFrameworkCore.InMemory 10.0.1",
+            "label": "Microsoft.EntityFrameworkCore.InMemory 9.0.7",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.InMemory",
+              "PackageVersion": "9.0.7",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "39c735f6-4599-4013-9160-3c0f548a65ed",
+          "ruleId": "NuGet.0006",
+          "projectPath": "ftodashboard.Tests\\ftodashboard.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Found 1 files matching the rule:\r\n\r\nNuGet.config\r\n",
+              "protected": "Found 1 files matching the rule:\r\n\r\nNuGet.config\r\n"
+            },
+            "kind": "File",
+            "path": "NuGet.config",
+            "snippet": "Found 1 files matching the rule:\r\n\r\nNuGet.config\r\n",
+            "protectedSnippet": "Found 1 files matching the rule:\r\n\r\nNuGet.config\r\n"
+          }
+        },
+        {
+          "incidentId": "542b28f3-a7e6-4d66-966a-c26a49fc25af",
+          "ruleId": "Project.0002",
+          "projectPath": "ftodashboard.Tests\\ftodashboard.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "ftodashboard.Tests\\ftodashboard.Tests.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0006": {
+      "id": "NuGet.0006",
+      "isFeature": false,
+      "description": "NuGet package source mappings are recommended.\n\nWhen NuGet.config contains multiple package sources, Package Source Mapping is a tool that can be used to improve your supply chain security, especially if you use a mix of public and private package sources.\n\nBy default, NuGet will search all configured package sources when it needs to download a package. When a package exists on multiple sources, it may not be deterministic which source the package will be downloaded from. With Package Source Mapping, you can filter, per package, which source(s) NuGet will search.",
+      "label": "NuGet package source mappings are recommended",
+      "severity": "Information",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2288407",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0005": {
+      "id": "NuGet.0005",
+      "isFeature": false,
+      "description": "NuGet package is deprecated.\n\nGo to its documentation and if there is a guidance for replacement of functionality provided by this package.",
+      "label": "NuGet package is deprecated",
+      "severity": "Optional",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262531",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.",
+      "label": "Behavioral change in selected .NET version",
+      "severity": "Potential",
+      "effort": 1
+    },
+    "Api.0001": {
+      "id": "Api.0001",
+      "isFeature": false,
+      "description": "API is binary incompatible for selected .NET version: affects existing binaries, often requiring recompilation, because the API has changed in a way that prevents older binaries from loading or executing.",
+      "label": "Binary incompatible for selected .NET version",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "API is source incompatible for selected .NET version: requires code changes to compile successfully when targeting a new version, such as removing obsolete APIs or changing method signatures.",
+      "label": "Source incompatible for selected .NET version",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}

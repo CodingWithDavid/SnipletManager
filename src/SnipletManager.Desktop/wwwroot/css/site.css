@@ -1,0 +1,55 @@
+:root {
+    --color-primary: #245a9c;
+    --color-primary-hover: #1b457a;
+    --color-secondary: #eef2f8;
+    --color-text: #1c2d46;
+    --color-muted: #5c6d85;
+    --color-background: #edf2f9;
+    --color-white: #ffffff;
+    --color-border: #d5dfed;
+    --color-error: #a62d35;
+    --color-error-background: #fff1f2;
+    --color-success: #245a9c;
+    --color-sidebar: #162d50;
+    --color-sidebar-text: #e6eefb;
+    --color-sidebar-muted: #afc3e0;
+    --color-sidebar-active: #284974;
+    --color-stripe: #f3f6fb;
+    --color-overlay: #162d5099;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --font-body: "Candara", "Calibri", sans-serif;
+    --font-heading: "Cambria", "Georgia", serif;
+    --font-code: "Cascadia Code", "Consolas", monospace;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-heading: 2.5rem;
+    --sidebar-width: 16rem;
+    --dialog-width: 46rem;
+    --editor-height: 16rem;
+    --border-width: 1px;
+    --shadow-panel: 0 8px 32px #162d5008;
+    --shadow-dialog: 0 24px 80px #162d5030;
+    --motion-fast: 160ms;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--color-text); background: var(--color-background); font-family: var(--font-body); font-size: var(--font-size-md); }
+button, input, select, textarea { font: inherit; }
+button, a, input, textarea, select { outline-offset: var(--spacing-xs); }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--color-primary); }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: 0.55; }
+input, textarea, select { min-width: 0; }
+h1, h2, p { margin-top: 0; }
+.startup { padding: var(--spacing-xxl); }
+#blazor-error-ui { display: none; position: fixed; bottom: 0; width: 100%; z-index: 100; background: var(--color-error-background); color: var(--color-error); padding: var(--spacing-md); }

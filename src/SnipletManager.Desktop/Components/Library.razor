@@ -1,0 +1,180 @@
+@implements IAsyncDisposable
+@inject LibraryService LibraryService
+@inject ClipboardService Clipboard
+@inject IOptions<AppSettings> Options
+@inject ILogger<Library> Logger
+@inject Microsoft.JSInterop.IJSRuntime JS
+
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand"><span class="brand-mark" aria-hidden="true">S.</span><div>SnipletManager<small>YOUR PERSONAL TEXT LIBRARY</small></div></div>
+        <nav aria-label="Snippet library">
+            <a href="#" class="@(_categoryId is null ? "nav-link active" : "nav-link")"
+               @onclick="() => SelectCategoryAsync(null)" @onclick:preventDefault
+               aria-current="@(_categoryId is null ? "page" : null)">
+                <span>All snippets</span><span class="count">@_categories.Sum(x => x.Count)</span>
+            </a>
+            <div class="nav-heading"><span>CATEGORIES</span><button type="button" class="icon-button" title="Add category" aria-label="Add category" @onclick="() => OpenCategory(null)" disabled="@_busy">+</button></div>
+            @foreach (var category in _categories)
+            {
+                <a @key="category.Id" href="#" class="@(_categoryId == category.Id ? "nav-link active" : "nav-link")"
+                   @onclick="() => SelectCategoryAsync(category.Id)" @onclick:preventDefault
+                   aria-current="@(_categoryId == category.Id ? "page" : null)">
+                    <span class="category-link-name">@category.Name</span><span class="count">@category.Count</span>
+                </a>
+            }
+            @if (_categories.Count == 0 && !_loading)
+            {
+                <p class="sidebar-hint">Give your snippets a home.<br />Create your first category.</p>
+            }
+        </nav>
+    </aside>
+    <main class="workspace">
+        <div class="eyebrow">WORKSPACE / TEXT LIBRARY</div>
+        <header class="page-header">
+            <div><h1>@(_selectedCategory?.Name ?? "All snippets")</h1><p>Useful words. Right where you need them.</p></div>
+            <div class="toolbar">
+                @if (_selectedCategory is not null)
+                {
+                    <button type="button" class="button secondary" @onclick="() => OpenCategory(_selectedCategory)" disabled="@_busy">Edit category</button>
+                    <button type="button" class="button danger-outline" @onclick="() => ConfirmCategoryDelete(_selectedCategory)" disabled="@_busy">Delete category</button>
+                }
+                <button type="button" class="button primary" @onclick="() => OpenSnippet(null)" disabled="@(_busy || _categories.Count == 0)">+ Add snippet</button>
+            </div>
+        </header>
+        <section class="library-panel" aria-label="Snippets">
+            <div class="search-bar">
+                <div class="search-field">
+                    <label for="snippet-search">Search names and text</label>
+                    <input id="snippet-search" type="search" class="form-control" placeholder="Find a snippet..."
+                           maxlength="@_settings.SearchLimit" @bind="_search" @bind:event="oninput" @bind:after="SearchAsync" />
+                </div>
+                <button type="button" class="button secondary" @onclick="ReloadAsync" disabled="@_busy">Refresh</button>
+            </div>
+            @if (_loadError is not null)
+            {
+                <div class="error-banner" role="alert">@_loadError Use Refresh to try again.</div>
+            }
+            @if (_loading)
+            {
+                <div class="empty-state" role="status">Opening your library...</div>
+            }
+            else
+            {
+                <div class="grid-container table-striped">
+                    <QuickGrid @ref="_grid" TGridItem="SnippetItem" ItemsProvider="GetItemsAsync" Pagination="_pagination" ItemKey="@(x => x.Id)" Class="snippet-grid">
+                        <TemplateColumn Title="Name" SortBy="@(GridSort<SnippetItem>.ByAscending(x => x.Name))" IsDefaultSortColumn="true" Context="snippet">
+                            <button type="button" class="snippet-name" @onclick="() => OpenSnippet(snippet)" title="Open and edit snippet">@snippet.Name</button>
+                        </TemplateColumn>
+                        <TemplateColumn Title="Text value" SortBy="@(GridSort<SnippetItem>.ByAscending(x => x.Value))" Context="snippet">
+                            <span class="text-preview">@snippet.Value</span>
+                        </TemplateColumn>
+                        <PropertyColumn Title="Category" Property="@(x => x.CategoryName)" Sortable="true" />
+                        <TemplateColumn Title="Actions" Context="snippet" Align="Align.Right">
+                            <div class="row-actions">
+                                <button type="button" class="row-button" @onclick="() => CopyAsync(snippet)" disabled="@_busy" aria-label="@($"Copy {snippet.Name}")">Copy</button>
+                                <button type="button" class="row-button" @onclick="() => OpenSnippet(snippet)" disabled="@_busy" aria-label="@($"Edit {snippet.Name}")">Edit</button>
+                                <button type="button" class="row-button destructive" @onclick="() => ConfirmSnippetDelete(snippet)" disabled="@_busy" aria-label="@($"Delete {snippet.Name}")">Delete</button>
+                            </div>
+                        </TemplateColumn>
+                    </QuickGrid>
+                </div>
+                @if (_pagination.TotalItemCount == 0 && _loadError is null)
+                {
+                    <div class="empty-state">
+                        <span class="empty-mark" aria-hidden="true">Aa</span>
+                        <h2>@(string.IsNullOrWhiteSpace(_search) ? "A little space for your next great snippet." : "No matching snippets")</h2>
+                        <p>@(string.IsNullOrWhiteSpace(_search) ? "Create a category, then save the text you reach for most." : "Try another name or phrase, or search in All snippets.")</p>
+                        @if (_categories.Count == 0)
+                        {
+                            <button type="button" class="button primary" @onclick="() => OpenCategory(null)">Create a category</button>
+                        }
+                    </div>
+                }
+                <footer class="grid-footer"><span>Click a column heading to sort. Click a name to edit.</span><Paginator State="_pagination" /></footer>
+            }
+        </section>
+        <p class="workspace-note">Keep formatting intact. Paste with Ctrl+V, or use Paste from clipboard in the editor.</p>
+    </main>
+</div>
+
+<dialog @ref="_dialog" class="editor-dialog" aria-labelledby="dialog-title" @onkeydown="HandleDialogKeyAsync">
+    @if (_mode != DialogMode.None)
+    {
+        <header class="dialog-header">
+            <div><div class="eyebrow">SNIPLET MANAGER</div><h2 id="dialog-title">@DialogTitle</h2></div>
+            <button type="button" class="close-button" aria-label="Close dialog" @onclick="CloseDialogAsync" disabled="@_busy">×</button>
+        </header>
+        @if (_mode is DialogMode.Category or DialogMode.Snippet)
+        {
+            <form @onsubmit="SaveAsync" @onsubmit:preventDefault>
+                @if (_formError is not null)
+                {
+                    <div class="error-banner" role="alert">@_formError</div>
+                }
+                <div class="form-group">
+                    <label for="item-name">@(_mode == DialogMode.Category ? "Category name" : "Snippet name")</label>
+                    <div class="spell-field">
+                        <input id="item-name" class="form-control" required maxlength="@(_mode == DialogMode.Category ? _settings.CategoryNameLimit : _settings.SnippetNameLimit)"
+                               @bind="_name" @bind:event="oninput" disabled="@_busy" spellcheck="false" autofocus />
+                        <div class="spell-mirror" aria-hidden="true"></div>
+                    </div>
+                </div>
+                @if (_mode == DialogMode.Snippet)
+                {
+                    <div class="form-group">
+                        <label for="item-category">Category</label>
+                        <select id="item-category" class="form-control" required @bind="_editorCategoryId" disabled="@_busy">
+                            @foreach (var category in _categories)
+                            {
+                                <option @key="category.Id" value="@category.Id">@category.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="value-label"><label for="item-value">Text value</label><button type="button" class="row-button" @onclick="PasteAsync" disabled="@_busy">Paste from clipboard</button></div>
+                        <div class="spell-field">
+                            <textarea id="item-value" class="form-control snippet-text" required maxlength="@_settings.SnippetTextLimit"
+                                      @bind="_value" @bind:event="oninput" disabled="@_busy" spellcheck="false"></textarea>
+                            <div class="spell-mirror" aria-hidden="true"></div>
+                        </div>
+                        <div class="field-help"><span>Plain text. Line breaks and spacing are preserved.</span><span>@_value.Length.ToString("N0") / @_settings.SnippetTextLimit.ToString("N0")</span></div>
+                    </div>
+                }
+                <footer class="dialog-footer">
+                    <button type="button" class="button secondary" @onclick="CloseDialogAsync" disabled="@_busy">Cancel</button>
+                    <button type="submit" class="button primary" disabled="@_busy">@(_busy ? "Saving..." : "Save")</button>
+                </footer>
+            </form>
+        }
+        else
+        {
+            @if (_formError is not null)
+            {
+                <div class="error-banner" role="alert">@_formError</div>
+            }
+            <p class="delete-message">
+                @if (_mode == DialogMode.DeleteCategory)
+                {
+                    <span>Delete <strong>@_name</strong> and every snippet currently in it? This cannot be undone.</span>
+                }
+                else
+                {
+                    <span>Delete <strong>@_name</strong>? This cannot be undone.</span>
+                }
+            </p>
+            <footer class="dialog-footer">
+                <button type="button" class="button secondary" @onclick="CloseDialogAsync" disabled="@_busy" autofocus>Keep it</button>
+                <button type="button" class="button danger" @onclick="DeleteAsync" disabled="@_busy">@(_busy ? "Deleting..." : "Delete permanently")</button>
+            </footer>
+        }
+    }
+</dialog>
+<div class="toast-region" aria-live="polite" aria-atomic="true">
+    @if (_toast is not null)
+    {
+        <div class="@(_toastError ? "toast error-toast" : "toast")" role="status">
+            <span>@_toast</span><button type="button" class="close-button" @onclick="DismissToast" aria-label="Dismiss notification">×</button>
+        </div>
+    }
+</div>

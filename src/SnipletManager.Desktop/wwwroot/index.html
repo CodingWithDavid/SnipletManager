@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <base href="/">
+    <title>SnipletManager</title>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="SnipletManager.Desktop.styles.css">
+</head>
+<body>
+    <div id="app"><div class="startup">Opening your snippet library...</div></div>
+    <div id="blazor-error-ui" role="alert">
+        Something went wrong. Close and reopen SnipletManager. Your saved snippets are still in SQLite.
+    </div>
+    <script src="dialog.js"></script>
+    <script src="spelling.js"></script>
+    <script src="_framework/blazor.webview.js"></script>
+</body>
+</html>

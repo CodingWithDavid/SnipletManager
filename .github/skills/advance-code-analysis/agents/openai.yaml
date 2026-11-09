@@ -1,0 +1,4 @@
+interface:
+  display_name: "Advanced Code Analysis"
+  short_description: "Run four focused code audits"
+  default_prompt: "Use $advance-code-analysis to run the four focused code-analysis audits and save each report under documents/."

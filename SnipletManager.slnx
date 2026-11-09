@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SnipletManager.Core/SnipletManager.Core.csproj" />
+    <Project Path="src/SnipletManager.Desktop/SnipletManager.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SnipletManager.Tests/SnipletManager.Tests.csproj" />
+  </Folder>
+</Solution>
